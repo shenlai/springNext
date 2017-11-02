@@ -16,7 +16,9 @@ import com.yi.ioc.HelloIoc;
 
 public class IOCTest {
 	
-		
+	/**
+	 *  利用默认的构造方法
+	 */
 	@Test
 	public void testCreateObjectByConstrutor() {
 		//1、启动spring 容器
@@ -33,4 +35,59 @@ public class IOCTest {
 		ioc2.sayHello();
 		
 	}
+	
+	
+	/**
+     * Spring 容器利用静态工厂方法创建对象
+     */
+    @Test
+	public void createObjectStaticFactory() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		HelloIoc staticFactory = (HelloIoc) context.getBean("helloStaticFactory");
+		
+		staticFactory.sayHelloV2();
+		
+	}
+	
+    
+    /**
+     * Spring 容器利用实例工厂方法创建对象
+     */
+    @Test
+    public void createObjectInstanceFactory(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+        HelloIoc staticFactory =
+                (HelloIoc) context.getBean("instance");
+        staticFactory.sayHelloV3();
+    }
+    
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
