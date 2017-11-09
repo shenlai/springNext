@@ -24,4 +24,63 @@
       --> 
     <bean id="instanceFactory" class="com.yi.ioc.HelloInstanceFactory"></bean> 
     <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean> 
+    
+    
+    
+    <!-- DI -->
+    <!--
+    	property是用来描述一个类的属性
+    	基本类型的封装类、String等需要值的类型用value赋值
+    	引用类型用ref赋值
+	-->
+    <bean id="person" class="com.yi.di.Person">
+    	<property name="pid" value="1"></property>
+    	<property name="pname" value="vae"></property>
+    	<property name="students">
+    		<ref bean="student"></ref>
+    	</property>
+    	<property name="lists">
+        	<list>
+            	<value>1</value>
+            	<ref bean="student"/>
+            	<value>vae</value>
+        	</list>
+    	</property>
+    	<property name="sets">
+        <set>
+            <value>1</value>
+            <ref bean="student"/>
+            <value>vae</value>
+        </set>
+    </property>
+    <property name="maps">
+        <map>
+            <entry key="m1" value="1"></entry>
+            <entry key="m2" >
+                <ref bean="student"/>
+            </entry>
+        </map>
+    </property>
+    <property name="properties">
+        <props>
+            <prop key="p1">p1</prop>
+            <prop key="p2">p2</prop>
+        </props>
+    </property>  
+    </bean>
+    <!-- 根据构造函数赋值 -->
+    <!--
+		如果spring的配置文件中的bean中没有<constructor-arg>该元素，则调用默认的构造函数
+        index  代表参数的位置  从0开始计算
+        type   指的是参数的类型,在有多个构造函数时，可以用type来区分，要是能确定是那个构造函数，可以不用写type
+        value  给基本类型赋值
+        ref    给引用类型赋值
+      -->
+    <bean id="person_con" class="com.yi.di.Person">
+        <constructor-arg index="0" type="java.lang.Long" value="1">
+        </constructor-arg>       
+        <constructor-arg index="1" type="com.yi.di.Student" ref="student_con"></constructor-arg>
+    </bean>
+    <bean id="student_con" class="com.yi.di.Student"></bean>
+    <bean id="student" class="com.yi.di.Student"></bean>
 </beans>
