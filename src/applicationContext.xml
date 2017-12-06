@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd">
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+     <!-- 组件扫描，扫描含有注解的类 -->
+    <context:component-scan base-package="com.yi.annotation"></context:component-scan>
            
     <!-- 创建对象的第一种方式：利用无参构造器 id:唯一标识符 class:类的全类名
     ①如果lazy-init为"default/false"在启动spring容器时创建对象（默认情况）
@@ -83,4 +89,6 @@
     </bean>
     <bean id="student_con" class="com.yi.di.Student"></bean>
     <bean id="student" class="com.yi.di.Student"></bean>
+    
+   
 </beans>
