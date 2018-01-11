@@ -1,12 +1,22 @@
 package com.yi.annotation;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("pr")
 public class Product {
 	private int pid;
     private String pname;
     private Double price;
+    
+    @Resource(name="unit")
+    private Unit unit;
+    
+    public void ShowUnit() {
+    	this.unit.descUnit();	
+	}
+    
     public int getPid() {
         return pid;
     }
