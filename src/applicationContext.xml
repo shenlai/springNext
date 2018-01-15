@@ -99,7 +99,7 @@
     <!--1、 创建目标类 -->
     <bean id="userService" class="com.yi.aop.UserServiceImpl"></bean>  
     <!--2、创建切面类（通知）  -->
-    <bean id="transaction" class="com.yi.aop.one.MyTransaction"></bean>
+    <bean id="transaction" class="com.yi.aop.MyTransaction"></bean>
     <aop:config>
         <!-- 切入点表达式 -->
         <aop:pointcut expression="execution(* com.yi.aop.*.*(..))" id="myPointCut"/>
