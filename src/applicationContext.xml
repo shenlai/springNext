@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd">
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd" >
+           
+     <!-- 组件扫描，扫描含有注解的类 -->
+    <context:component-scan base-package="com.yi.annotation"></context:component-scan>
            
     <!-- 创建对象的第一种方式：利用无参构造器 id:唯一标识符 class:类的全类名
     ①如果lazy-init为"default/false"在启动spring容器时创建对象（默认情况）
@@ -25,11 +34,83 @@
         factory-method:工厂方法名称
       --> 
     <bean id="instanceFactory" class="com.yi.ioc.HelloInstanceFactory"></bean> 
+
     <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean>
     
     <!-- 生命周期 -->
     <bean id="springLifeCycle" init-method="init" destroy-method="destroy" class="com.yi.ioc.SpringLifeCycle"></bean>
     
+    <!-- DI -->
+    <!--
+    	property是用来描述一个类的属性
+    	基本类型的封装类、String等需要值的类型用value赋值
+    	引用类型用ref赋值
+	-->
+    <bean id="person" class="com.yi.di.Person">
+    	<property name="pid" value="1"></property>
+    	<property name="pname" value="vae"></property>
+    	<property name="students">
+    		<ref bean="student"></ref>
+    	</property>
+    	<property name="lists">
+        	<list>
+            	<value>1</value>
+            	<ref bean="student"/>
+            	<value>vae</value>
+        	</list>
+    	</property>
+    	<property name="sets">
+        <set>
+            <value>1</value>
+            <ref bean="student"/>
+            <value>vae</value>
+        </set>
+    </property>
+    <property name="maps">
+        <map>
+            <entry key="m1" value="1"></entry>
+            <entry key="m2" >
+                <ref bean="student"/>
+            </entry>
+        </map>
+    </property>
+    <property name="properties">
+        <props>
+            <prop key="p1">p1</prop>
+            <prop key="p2">p2</prop>
+        </props>
+    </property>  
+    </bean>
+    <!-- 根据构造函数赋值 -->
+    <!--
+		如果spring的配置文件中的bean中没有<constructor-arg>该元素，则调用默认的构造函数
+        index  代表参数的位置  从0开始计算
+        type   指的是参数的类型,在有多个构造函数时，可以用type来区分，要是能确定是那个构造函数，可以不用写type
+        value  给基本类型赋值
+        ref    给引用类型赋值
+      -->
+    <bean id="person_con" class="com.yi.di.Person">
+        <constructor-arg index="0" type="java.lang.Long" value="1">
+        </constructor-arg>       
+        <constructor-arg index="1" type="com.yi.di.Student" ref="student_con"></constructor-arg>
+    </bean>
+    <bean id="student_con" class="com.yi.di.Student"></bean>
+    <bean id="student" class="com.yi.di.Student"></bean>
     
-     
+    
+    
+    <!-- AOP -->
+    <!--1、 创建目标类 -->
+    <bean id="userService" class="com.yi.aop.UserServiceImpl"></bean>  
+    <!--2、创建切面类（通知）  -->
+    <bean id="transaction" class="com.yi.aop.MyTransaction"></bean>
+    <aop:config>
+        <!-- 切入点表达式 -->
+        <aop:pointcut expression="execution(* com.yi.aop.*.*(..))" id="myPointCut"/>
+        <aop:aspect ref="transaction">
+            <!-- 配置前置通知，注意 method 的值要和 对应切面的类方法名称相同 -->
+            <aop:before method="before" pointcut-ref="myPointCut"></aop:before>
+            <aop:after-returning method="after" pointcut-ref="myPointCut"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
