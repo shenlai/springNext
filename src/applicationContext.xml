@@ -17,8 +17,10 @@
     <!-- 创建对象的第一种方式：利用无参构造器 id:唯一标识符 class:类的全类名
     ①如果lazy-init为"default/false"在启动spring容器时创建对象（默认情况）
 　　　②如果lazy-init为"true",在context.getBean时才要创建对象 
+
+            默认scope的值是singleton，即产生的对象是单例的
     -->
-    <bean id="helloIoc" lazy-init="true" class="com.yi.ioc.HelloIoc" ></bean>  
+    <bean id="helloIoc" lazy-init="true" scope="singleton" class="com.yi.ioc.HelloIoc" ></bean>  
     <!-- 别名属性  name：和bean的 id 属性对应 -->
     <alias name="helloIoc" alias="helloIoc2"/>
      
@@ -33,9 +35,11 @@
         factory-method:工厂方法名称
       --> 
     <bean id="instanceFactory" class="com.yi.ioc.HelloInstanceFactory"></bean> 
-    <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean> 
+
+    <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean>
     
-    
+    <!-- 生命周期 -->
+    <bean id="springLifeCycle" init-method="init" destroy-method="destroy" class="com.yi.ioc.SpringLifeCycle"></bean>
     
     <!-- DI -->
     <!--
