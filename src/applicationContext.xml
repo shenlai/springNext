@@ -12,6 +12,7 @@
            
      <!-- 组件扫描，扫描含有注解的类 -->
     <context:component-scan base-package="com.yi.annotation"></context:component-scan>
+    <context:component-scan base-package="com.yi.aop"></context:component-scan>
            
     <!-- 创建对象的第一种方式：利用无参构造器 id:唯一标识符 class:类的全类名
     ①如果lazy-init为"default/false"在启动spring容器时创建对象（默认情况）
@@ -94,19 +95,28 @@
     <bean id="student" class="com.yi.di.Student"></bean>
     
     
-    
     <!-- AOP -->
+    <!-- 1-1、xml 的方式实现 AOP  -->
     <!--1、 创建目标类 -->
-    <bean id="userService" class="com.yi.aop.UserServiceImpl"></bean>  
+    <bean id="userService" class="com.yi.aop.UserServiceImpl"></bean>
     <!--2、创建切面类（通知）  -->
-    <bean id="transaction" class="com.yi.aop.MyTransaction"></bean>
+	<bean id="myAspect" class="com.yi.aop.MyAspect"></bean>
     <aop:config>
+     	<aop:aspect ref="myAspect">
         <!-- 切入点表达式 -->
-        <aop:pointcut expression="execution(* com.yi.aop.*.*(..))" id="myPointCut"/>
-        <aop:aspect ref="transaction">
-            <!-- 配置前置通知，注意 method 的值要和 对应切面的类方法名称相同 -->
-            <aop:before method="before" pointcut-ref="myPointCut"></aop:before>
-            <aop:after-returning method="after" pointcut-ref="myPointCut"/>
-        </aop:aspect>
+       <aop:pointcut expression="execution(* com.yi.aop.*.*(..))" id="myPointCut"/>
+        <aop:before method="myBefore" pointcut-ref="myPointCut"/>
+        <aop:after-returning method="myAfterReturning" pointcut-ref="myPointCut" returning="ret" />
+        <aop:after method="myAfter" pointcut-ref="myPointCut"/>
+        <aop:after-throwing method="myAfterThrowing" pointcut-ref="myPointCut" throwing="e"/>
+        </aop:aspect>  
     </aop:config>
+    
+ 	<!-- 1-2、注解实现 AOP  -->
+ 	<!--1、 创建目标类 -->
+    <bean id="userServiceTwo" class="com.yi.aop.UserServiceImplTwo"></bean>  
+    <!--2、创建切面类（通知）  -->
+	<bean id="myAspectTwo" class="com.yi.aop.MyAspectTwo"></bean>
+	<!--3、确定 aop 注解生效  -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

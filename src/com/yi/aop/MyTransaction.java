@@ -9,4 +9,6 @@ public class MyTransaction {
     public void after(){
         System.out.println("提交事务");
     }
+    
+  
 }
