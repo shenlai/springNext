@@ -3,9 +3,14 @@
  */
 package com.yi.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 import com.yi.ioc.HelloIoc;
 import com.yi.ioc.SpringLifeCycle;
@@ -20,20 +25,23 @@ public class IOCTest {
 	/**
 	 *  利用默认的构造方法
 	 */
-	//@Test
+	@Test
 	public void testCreateObjectByConstrutor() {
+		
+		
 		//1、启动spring 容器
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
 		
 		//2、从spring容器中读取出数据
-		HelloIoc ioc = (HelloIoc)context.getBean("helloIoc");
+		//HelloIoc ioc = (HelloIoc)context.getBean("helloIoc");
 		
 		//通过对象调用方法
-		ioc.sayHello();
+		//ioc.sayHello();
 		
 		//利用配置文件 alias别名属性 创建对象
-		HelloIoc ioc2 = (HelloIoc)context.getBean("helloIoc2");
-		ioc2.sayHello();
+		//HelloIoc ioc2 = (HelloIoc)context.getBean("helloIoc2");
+		//ioc2.sayHello();
 		
 	}
 	
@@ -89,7 +97,7 @@ public class IOCTest {
         　　4、当spring容器关闭的时候执行destroy方法
 　　	 注意：当scope为"prototype"时，调用 close（） 方法时是不会调用 destroy 方法的
      */
-     @Test
+    // @Test
     public void testSpringLifeCycle() {
     	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     	SpringLifeCycle hello = (SpringLifeCycle)context.getBean("springLifeCycle");
