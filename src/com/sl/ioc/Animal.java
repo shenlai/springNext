@@ -1,25 +1,28 @@
 package com.sl.ioc;
+import org.springframework.stereotype.Component;
 
+
+@Component("animalD")
 public class Animal {
-	private String name;
 	
-	private float weight;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
+	private Dog dog;
 	
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
+	public Animal(Dog dog) {
+		this.dog = dog;
+	}
+		
+    public void AnimalAction()
+    {
+    	dog.Wang();
+    }
+   
 	
 }

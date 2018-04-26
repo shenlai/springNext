@@ -1,5 +1,8 @@
 package com.yi.aop;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class User {
     private int uid;
     private String uname;

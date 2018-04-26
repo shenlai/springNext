@@ -8,7 +8,7 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/JavaProject/springNext/lib/spring-beans-5.0.0.RELEASE-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-context-5.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-context-5.0.0.RELEASE.jar" sourcepath="D:/JavaProject/springNext/lib/spring-context-5.0.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-core-5.0.0.RELEASE.jar" sourcepath="D:/JavaProject/springNext/lib/spring-core-5.0.0.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/D:/JavaProject/springNext/lib/spring-core-5.0.0.RELEASE-javadoc.jar!/"/>
@@ -20,7 +20,7 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/JavaProject/springNext/lib/spring-aop-5.0.0.RELEASE-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-aspects-5.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-aspects-5.0.0.RELEASE.jar" sourcepath="D:/JavaProject/springNext/lib/spring-aspects-5.0.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/com.springsource.org.aopalliance-1.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="D:/JavaProject/springNext/lib/spring-test-5.0.0.RELEASE.jar"/>
