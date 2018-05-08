@@ -1,29 +1,38 @@
 package com.sl.ioc;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.yi.aop.User;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes=AnimalConfig.class)
 public class TestClass {
 
+	
 	@Test
 	public void TestGetDoInstance() {
-		
 		//应用上下文
+		
 		ApplicationContext context = new AnnotationConfigApplicationContext(AnimalConfig.class);
-		Dog dog = (Dog)context.getBean("dog");
-		dog.Wang();
+		
+		AnimalInstance animalInstance = context.getBean(AnimalInstance.class);
+		animalInstance.animal.Say();
+		
+		
+	/*	String[] beanNames = context.getBeanDefinitionNames();
 
-		Animal animal = (Animal) context.getBean("animal");
-		animal.AnimalAction();
+        for(String bean : beanNames) {
 
-		assertSame(dog, animal.getDog());
+                System.out.println(bean);
+
+        }
+		*/
+		/*System.setProperty("dog", "122");
+		
+		Animal animal = context.getBean(Animal.class);
+		
+		animal.Say();*/
+		
 	}
 }

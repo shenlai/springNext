@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd" >
+    
+    <!-- 申明一个bean -->
+    
+     <bean id="huskyDog"  class="com.sl.ioc.Dog" scope="singleton" ></bean>
+    
+    <bean id="cat"  class="com.sl.ioc.Cat" scope="singleton" >
+    <property name="name" value="testCat"></property>
+    <property name="color" value="YELLOW"></property>
+    <property name="strs">
+    <list>
+    <value>str1</value>
+    <value>str2</value>
+    </list>
+    </property>
+    </bean>	
+   
+</beans>
