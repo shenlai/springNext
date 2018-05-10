@@ -1,13 +1,9 @@
 package com.sl.aop;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-
-
-@Aspect  //定义切面
+//@Aspect  //定义切面
 public class OrderLogger {
 	
-	@Before("execution(* com.sl.aop)")
+	//@Before("execution(* com.sl.aop)")
 	public void beforeCreateOrder(){
         System.out.println("before create order");
     }

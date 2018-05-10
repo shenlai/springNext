@@ -1,10 +1,8 @@
 package com.sl.aop;
 
-public class OrderService {
+public interface OrderService {
 
-	public void createOrder() {
-		System.out.println("create an order");
-	}
+	public void createOrder();
 	
 }
 
