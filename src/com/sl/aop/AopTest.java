@@ -6,16 +6,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.DebuggingClassWriter;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import sun.misc.ProxyGenerator;
 
 public class AopTest {
 	
-	   
-
-
 	@Test
+	public void TestAspectAop() {
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("aoptextbean.xml");
+		OrderService orderService =	(OrderService)context.getBean("orderServiceImpl");
+		orderService.createOrder();
+		System.out.println("-----------------------");
+		orderService.createOrder("888");
+	}
+
+	//@Test
 	public void Testdynamicproxy() throws IOException {
 	
 		/*

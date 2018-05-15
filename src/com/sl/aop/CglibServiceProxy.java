@@ -23,10 +23,10 @@ public class CglibServiceProxy implements MethodInterceptor {
     public Object getInstance() { 
         Enhancer enhancer = new Enhancer();  
         
-        //设置目标类（需要被代理的类）  
+        //设置父类类型,目的是将被代理的对象类型传入,因为cglib最终是会为目标类创建一个子类
         enhancer.setSuperclass(this.targetClass.getClass());
         
-        // 回调方法  
+        // 设置回调，目的是后续对代理类中的方法的调用会转到该回调中， 
         enhancer.setCallback(this);
         
         // 创建代理对象  

@@ -13,7 +13,7 @@ import com.yi.aop.UserServiceImpl;
 
 public class AOPTest {
 
-	@Test
+	//@Test
 	public void testAop(){
 		Object target  = new UserServiceImpl();
 		

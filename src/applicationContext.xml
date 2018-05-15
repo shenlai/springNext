@@ -118,9 +118,9 @@
     
  	<!-- 1-2、注解实现 AOP  -->
  	<!--1、 创建目标类 -->
-    <bean id="userServiceTwo" class="com.yi.aop.UserServiceImplTwo"></bean>  
+    <!--  --><bean id="userServiceTwo" class="com.yi.aop.UserServiceImplTwo"></bean>-->  
     <!--2、创建切面类（通知）  -->
-	<bean id="myAspectTwo" class="com.yi.aop.MyAspectTwo"></bean>
+	<!-- <bean id="myAspectTwo" class="com.yi.aop.MyAspectTwo"></bean> -->
 	<!--3、确定 aop 注解生效  -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

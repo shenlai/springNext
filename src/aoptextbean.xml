@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd" >
+    
+    <!-- 组件扫描，扫描含有注解的类 -->
+    <context:component-scan base-package="com.sl.aop"></context:component-scan>
+    <!-- 使用aspectj注解 -->
+    <!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+    
+    <bean id="orderLogger" class="com.sl.aop.OrderLogger"></bean>
+    
+    <aop:config>
+        <!--1： 申明一个切面   多个切面时order指定优先级-->
+    	<aop:aspect ref="orderLogger" order="0">
+    		<!-- 2:定义通知  method:指定通知名  pointcut：指定切点-->
+    	    <aop:before method="beforeCreateOrder" pointcut="execution(* com.sl.aop.OrderService.*())" />
+    	    <!-- <aop:before method="beforeCreateOrder" pointcut="execution(public * com.sl.aop.*.*(String)) and args(orderNumber)" /> -->
+    	    <aop:after method="afterCreateOrder" pointcut="execution(* com.sl.aop.OrderServiceImpl.createOrder(..))" />
+    	    <aop:after-returning method="createOrderSuccess" pointcut="execution(* com.sl.aop.OrderServiceImpl.createOrder(..))" />
+    	    <aop:after-throwing method="createOrderError" pointcut="execution(* com.sl.aop.OrderServiceImpl.createOrder(..))" />
+    	    <aop:around method="createOrderAround" pointcut="execution(* com.sl.aop.OrderServiceImpl.createOrder(..))" />
+    	</aop:aspect>
+    </aop:config>
+    
+    
+</beans>
